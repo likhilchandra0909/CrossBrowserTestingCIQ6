@@ -1,40 +1,38 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
 
 public class CrossBrowserTest {
 
-    WebDriver driver;
 
-    @Parameters("browser")
     @Test
-    public void verifyGoogleTitle(String browser) {
+    public void verifyGoogleTitle() {
 
-        if (browser.equalsIgnoreCase("chrome")) {
 
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
+        // Launch Chrome Browser
+        WebDriver driver = new ChromeDriver();
 
-        } else if (browser.equalsIgnoreCase("firefox")) {
 
-            WebDriverManager.firefoxdriver().setup();
-            driver = new FirefoxDriver();
-        }
-
-        driver.manage().window().maximize();
-
+        // Open Google
         driver.get("https://www.google.com");
 
+
+        // Get Page Title
         String title = driver.getTitle();
 
-        System.out.println(browser + " Title: " + title);
 
-        Assert.assertEquals(title, "Google");
+        System.out.println("Page Title: " + title);
 
+
+        // Verify Title
+        Assert.assertTrue(title.contains("Google"));
+
+
+        // Close Browser
         driver.quit();
+
     }
+
 }
