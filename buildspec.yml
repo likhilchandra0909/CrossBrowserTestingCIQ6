@@ -1,19 +1,11 @@
 version: 0.2
 
 phases:
-
-  install:
-    commands:
-      - echo Installing dependencies
-      - mvn -version
-
   build:
     commands:
-      - echo Starting Maven build
-      - mvn clean test -B
-
-reports:
-  test-report:
-    files:
-      - '**/surefire-reports/*.xml'
-    file-format: JUNIT
+      - echo "Checking files"
+      - pwd
+      - ls -la
+      - find . -maxdepth 3 -name pom.xml
+      - echo "Starting maven build"
+      - mvn -B package --file pom.xml
